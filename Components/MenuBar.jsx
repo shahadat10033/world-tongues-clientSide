@@ -103,7 +103,7 @@ const MenuBar = () => {
                     isPending
                       ? ""
                       : isActive
-                      ? " text-decoration-none  text-primary ms-5 btn  btn-warning text-light"
+                      ? " text-decoration-none  text-primary ms-5 btn  btn-primary text-light"
                       : "ms-5 text-decoration-none  text-light btn btn-light text-dark"
                   }
                 >
