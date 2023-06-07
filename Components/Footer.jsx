@@ -120,7 +120,7 @@ const Footer = () => {
                   style={{ width: 27, height: 27, borderRadius: "50%" }}
                   className="me-2"
                 ></img>
-                World Tongues. copyright: All rights reserved.{" "}
+                World Tongues. copyright: All rights reserved.
                 {new Date().getFullYear()}
               </p>
             </div>
