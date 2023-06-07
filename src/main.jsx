@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "../Routes/Home";
 import Root from "../Routes/Root";
 import ErrPage from "../Routes/ErrPage";
+import Login from "../Routes/Login";
+import Register from "../Routes/Register";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },
