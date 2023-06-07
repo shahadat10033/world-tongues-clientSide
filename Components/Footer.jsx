@@ -80,20 +80,21 @@ const Footer = () => {
                     Twitter
                   </a>
                 </li>
+
                 <li>
-                  <li>
-                    <a
-                      href="https://www.instagram.com"
-                      className="text-decoration-none text-white"
-                    >
-                      <img
-                        src="github.png"
-                        alt=""
-                        style={{ width: 27, height: 27, borderRadius: "50%" }}
-                      ></img>
-                      Github
-                    </a>
-                  </li>
+                  <a
+                    href="https://www.instagram.com"
+                    className="text-decoration-none text-white"
+                  >
+                    <img
+                      src="github.png"
+                      alt=""
+                      style={{ width: 27, height: 27, borderRadius: "50%" }}
+                    ></img>
+                    Github
+                  </a>
+                </li>
+                <li>
                   <a
                     href="https://www.instagram.com"
                     className="text-decoration-none text-white"
@@ -113,7 +114,6 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-12 text-center">
               <p>
-                {" "}
                 <img
                   src="titleLogo.webp"
                   alt=""
