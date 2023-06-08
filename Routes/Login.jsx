@@ -46,7 +46,7 @@ const Login = () => {
   };
   return (
     <div className="row m-5 p-5">
-      <div className="col-md-6 h-100 my-auto ">
+      <div className="col-md-6 h-100  ">
         <Lottie
           className=""
           animationData={loginAnimation}
@@ -55,7 +55,7 @@ const Login = () => {
           width={400}
         />
       </div>
-      <div className="col-md-6 h-100 my-auto  border border-2 rounded-4 bg-dark text-light mb-5 p-5">
+      <div className="col-md-6 h-100 my-auto  border border-2 rounded-4 bg-dark text-light  p-5">
         <Form className="" onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-center">Login Form</h3>
           <Form.Group className="mb-3">

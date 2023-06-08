@@ -10,6 +10,9 @@ import Login from "../Routes/Login";
 import Register from "../Routes/Register";
 import AuthProvider from "../Provider/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Dashboard from "../Routes/Dashboard";
+import Classes from "../Routes/Classes";
+import Instructors from "../Routes/Instructors";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -29,6 +32,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/classes",
+        element: <Classes></Classes>,
+      },
+      {
+        path: "/instructors",
+        element: <Instructors></Instructors>,
       },
     ],
   },
