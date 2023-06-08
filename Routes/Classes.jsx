@@ -1,7 +1,4 @@
 import React from "react";
 
-const Classes = () => {
-  return <div></div>;
-};
-
+const Classes = () => {};
 export default Classes;

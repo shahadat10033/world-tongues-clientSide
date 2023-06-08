@@ -8,7 +8,7 @@ const PopularInstructors = () => {
     const data = await response.json();
     return data;
   }
-  const { data } = useQuery("popularClasses", fetchData);
+  const { data } = useQuery("popularInstructors", fetchData);
   console.log(data);
   return (
     <div>
