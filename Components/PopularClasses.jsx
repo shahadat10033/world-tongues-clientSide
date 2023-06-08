@@ -14,20 +14,21 @@ const PopularClasses = () => {
     <div>
       <h2 className="text-center fw-bold fs-1">Popular classes</h2>
       <div className="row">
-        {data.map((pClass) => (
-          <Bounce key={pClass._id} className="col-md-4" duration="10000">
-            <div>
-              <div className="p-5">
-                <img
-                  src={pClass.classImage}
-                  alt=""
-                  className="border border-3 img-fluid"
-                  style={{ height: "15rem" }}
-                />
+        {data &&
+          data.map((pClass) => (
+            <Bounce key={pClass._id} className="col-md-4" duration="10000">
+              <div>
+                <div className="p-5">
+                  <img
+                    src={pClass.classImage}
+                    alt=""
+                    className="border border-3 img-fluid"
+                    style={{ height: "15rem" }}
+                  />
+                </div>
               </div>
-            </div>
-          </Bounce>
-        ))}
+            </Bounce>
+          ))}
       </div>
     </div>
   );
