@@ -5,18 +5,45 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import loginAnimation from "../public/login.json";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContex } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import GoogleLogin from "../Shared/GoogleLogin";
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
+  const { loginUser } = useContext(AuthContex);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    const { email, password } = data;
+    loginUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "log in successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "login unsuccefull.try again!",
+        });
+      });
+  };
   return (
     <div className="row m-5 p-5">
       <div className="col-md-6 h-100 my-auto ">
@@ -72,6 +99,10 @@ const Login = () => {
           <Link to="/register">
             <span className="underline "> Register </span>
           </Link>
+          <hr />
+          <div className="text-center">
+            <GoogleLogin></GoogleLogin>
+          </div>
         </div>
       </div>
     </div>

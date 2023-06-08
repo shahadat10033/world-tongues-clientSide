@@ -5,8 +5,12 @@ import Lottie from "lottie-react";
 import registerAnimation from "../public/register.json";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContex } from "../Provider/AuthProvider";
+import GoogleLogin from "../Shared/GoogleLogin";
 
 const Register = () => {
+  const { registerEmail, userUpdate } = useContext(AuthContex);
   const {
     register,
     handleSubmit,
@@ -15,15 +19,8 @@ const Register = () => {
   } = useForm();
   const onSubmit = (data) => {
     const { name, photoURL, email, password, confirmPassword } = data;
-    const pattern =
-      /^(?=.*[A-Z])(?=.*\d{6,})(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/;
-    if (!pattern.test(password)) {
-      return Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Password must be 6 character,at least one uppercase letter and a one special character",
-      });
-    }
+    console.log(data);
+
     if (password !== confirmPassword) {
       return Swal.fire({
         icon: "error",
@@ -32,7 +29,19 @@ const Register = () => {
       });
     }
 
-    console.log(data);
+    registerEmail(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        userUpdate(name, photoURL);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
   };
 
   return (
@@ -81,12 +90,22 @@ const Register = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              {...register("password")}
+              {...register("password", {
+                minLength: 6,
+                pattern:
+                  /^(?=.*[!@#$%^&*()\-=_+{}[\]:;"'<>,.?\\/])(?=.*[A-Z]).+$/,
+              })}
               placeholder="Password"
               required
             />
-
-            <Form.Text className="">{}</Form.Text>
+            {errors.password?.type === "minLength" && (
+              <p className="">Password must be 6 character</p>
+            )}
+            {errors.password?.type === "pattern" && (
+              <p className="">
+                Password must have a special character and a uppercase letter
+              </p>
+            )}
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
@@ -112,6 +131,10 @@ const Register = () => {
           <Link to="/login">
             <span className="underline "> Log In</span>
           </Link>
+          <hr />
+          <div className="text-center">
+            <GoogleLogin></GoogleLogin>
+          </div>
         </div>
       </div>
     </div>

@@ -1,10 +1,17 @@
 import React from "react";
+import { useContext } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContex } from "../Provider/AuthProvider";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const MenuBar = () => {
-  const user = null;
+  const { user, loader, logOut } = useContext(AuthContex);
+  if (loader) {
+    <p className="fw-bold fs-1"> loading............</p>;
+  }
   return (
     <div className="fixed-top ">
       <Navbar
@@ -65,7 +72,7 @@ const MenuBar = () => {
               Classes
             </NavLink>
             <NavLink
-              to="/idashboard"
+              to="/dashboard"
               className={({ isActive, isPending }) =>
                 isPending
                   ? ""
@@ -79,7 +86,11 @@ const MenuBar = () => {
             <span className="mt-2">
               {user ? (
                 <span className="ms-5">
-                  <span>
+                  <span
+                    className="me-3"
+                    data-tooltip-id="my-tool"
+                    data-tooltip-content={user?.displayName}
+                  >
                     <img
                       src={user?.photoURL}
                       alt=""
@@ -88,10 +99,12 @@ const MenuBar = () => {
                         height: 40,
                         borderRadius: 50,
 
-                        border: "2px solid yellow",
+                        border: "2px solid black",
                       }}
                     />
+                    <Tooltip id="my-tool" />
                   </span>
+
                   <button className="btn btn-light " onClick={logOut}>
                     Log out
                   </button>
