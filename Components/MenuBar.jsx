@@ -18,7 +18,7 @@ const MenuBar = () => {
           to="/"
           className="text-dark d-flex justify-content-center fw-bold fs-2"
         >
-          <img src="titleLogo.webp" alt="" style={{ width: 35, height: 35 }} />{" "}
+          <img src="titleLogo.webp" alt="" style={{ width: 38, height: 38 }} />{" "}
           <span>WORLD TONGUES</span>
         </Navbar.Brand>
 

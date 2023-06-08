@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import loginAnimation from "../public/login.json";
+import { useForm } from "react-hook-form";
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <div className="row m-5 p-5">
       <div className="col-md-6 h-100 my-auto ">
@@ -24,17 +28,14 @@ const Login = () => {
           width={400}
         />
       </div>
-      <div className="col-md-6 h-100 my-auto ">
-        <Form
-          className=" border border-2 rounded-4 bg-dark text-light mb-5 p-5"
-          onSubmit={handleLogin}
-        >
+      <div className="col-md-6 h-100 my-auto  border border-2 rounded-4 bg-dark text-light mb-5 p-5">
+        <Form className="" onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-center">Login Form</h3>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              name="email"
+              {...register("email")}
               placeholder="Enter email"
               required
             />
@@ -44,29 +45,34 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type={showPass ? "text" : "password"}
-              name="password"
+              {...register("password")}
               placeholder="Password"
               required
             />
 
-            <button className="mt-2 btn btn-light" onClick={handleShowPassword}>
+            <button
+              className="mt-2 btn btn-light"
+              type="button"
+              onClick={handleShowPassword}
+            >
               {showPass ? <BsEyeFill /> : <BsEyeSlashFill />}
             </button>
             <Form.Text className="">{}</Form.Text>
           </Form.Group>
 
           <button className="btn btn-primary" type="submit">
-            Submit
+            Login
           </button>
           <br />
-          <Form.Text className="text-light">
-            New to world tongues?
-            <Link to="/register">
-              <span className="underline "> Register </span>
-            </Link>
-          </Form.Text>
+
           <br />
         </Form>
+        <div className="text-light">
+          New to world tongues?
+          <Link to="/register">
+            <span className="underline "> Register </span>
+          </Link>
+        </div>
       </div>
     </div>
   );

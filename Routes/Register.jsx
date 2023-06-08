@@ -3,9 +3,38 @@ import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import registerAnimation from "../public/register.json";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const handleRegister = () => {};
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    const { name, photoURL, email, password, confirmPassword } = data;
+    const pattern =
+      /^(?=.*[A-Z])(?=.*\d{6,})(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/;
+    if (!pattern.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be 6 character,at least one uppercase letter and a one special character",
+      });
+    }
+    if (password !== confirmPassword) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password does not match.try again!",
+      });
+    }
+
+    console.log(data);
+  };
+
   return (
     <div className="row m-5 p-5">
       <div className="col-md-6 h-100 my-auto ">
@@ -17,17 +46,14 @@ const Register = () => {
           width={400}
         />
       </div>
-      <div className="col-md-6 h-100 my-auto ">
-        <Form
-          className=" border border-2 rounded-4 bg-dark text-light mb-5 p-5"
-          onSubmit={handleRegister}
-        >
+      <div className="col-md-6 h-100 my-auto  border border-2 rounded-4 bg-dark text-light mb-5 p-5 ">
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-center">Register Form</h3>
           <Form.Group className="mb-3">
             <Form.Label>Your Name</Form.Label>
             <Form.Control
               type="text"
-              name="name"
+              {...register("name")}
               placeholder="Enter your name"
               required
             />
@@ -36,7 +62,7 @@ const Register = () => {
             <Form.Label>Your Photo</Form.Label>
             <Form.Control
               type="text"
-              name="photoURL"
+              {...register("photoURL")}
               placeholder="Your Photo URL"
               required
             />
@@ -45,7 +71,7 @@ const Register = () => {
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              name="email"
+              {...register("email")}
               placeholder="Enter email"
               required
             />
@@ -55,7 +81,7 @@ const Register = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              name="password"
+              {...register("password")}
               placeholder="Password"
               required
             />
@@ -66,7 +92,7 @@ const Register = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              name="ConfirmPassword"
+              {...register("confirmPassword")}
               placeholder="Confirm Your Password"
               required
             />
@@ -75,17 +101,18 @@ const Register = () => {
           </Form.Group>
 
           <button className="btn btn-primary" type="submit">
-            Submit
+            Registration
           </button>
           <br />
-          <Form.Text className="text-light">
-            Already have an account?
-            <Link to="/login">
-              <span className="underline "> Log In</span>
-            </Link>
-          </Form.Text>
+
           <br />
         </Form>
+        <div className="text-light">
+          Already have an account?
+          <Link to="/login">
+            <span className="underline "> Log In</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
