@@ -62,7 +62,11 @@ const Classes = () => {
                   </p>
                   <p className="fs-5 fw-semibold">Price: $ {aClass.price}</p>
                   <div>
-                    <button className="btn btn-success" onClick={handleSelect}>
+                    <button
+                      className="btn btn-success"
+                      disabled={aClass.availableSeats == 0 ? true : false}
+                      onClick={handleSelect}
+                    >
                       Select
                     </button>
                   </div>

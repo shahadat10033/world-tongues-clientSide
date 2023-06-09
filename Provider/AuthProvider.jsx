@@ -56,15 +56,7 @@ const AuthProvider = ({ children }) => {
       displayName: name,
       photoURL: photoURL,
     })
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User created successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
+      .then(() => {})
       .catch((error) => {
         // An error occurred
         // ...

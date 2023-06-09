@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
 import GoogleLogin from "../Shared/GoogleLogin";
+import axios from "axios";
 
 const Register = () => {
   const { registerEmail, userUpdate } = useContext(AuthContex);
@@ -29,19 +30,37 @@ const Register = () => {
       });
     }
 
-    registerEmail(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        userUpdate(name, photoURL);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        return Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: errorMessage,
+    registerEmail(email, password).then((userCredential) => {
+      const user = userCredential.user;
+
+      const loggedInUsers = { name, email, role: "student" };
+
+      axios
+        .post("http://localhost:5000/loggedInUsers", loggedInUsers)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
         });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "user created successfully",
+        showConfirmButton: false,
+        timer: 1500,
       });
+
+      userUpdate(name, photoURL);
+    });
+    reset().catch((error) => {
+      const errorMessage = error.message;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
+    });
   };
 
   return (
