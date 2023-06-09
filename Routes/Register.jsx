@@ -11,7 +11,7 @@ import GoogleLogin from "../Shared/GoogleLogin";
 import axios from "axios";
 
 const Register = () => {
-  const { registerEmail, userUpdate } = useContext(AuthContex);
+  const { registerEmail, userUpdate, logOut } = useContext(AuthContex);
   const {
     register,
     handleSubmit,
@@ -52,6 +52,7 @@ const Register = () => {
       });
 
       userUpdate(name, photoURL);
+      logOut();
     });
     reset().catch((error) => {
       const errorMessage = error.message;

@@ -14,6 +14,7 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export const AuthContex = createContext(null);
 
@@ -38,6 +39,22 @@ const AuthProvider = ({ children }) => {
       .then((result) => {
         const user = result.user;
         setLoader(true);
+
+        const loggedInUsers = {
+          name: user.displayName,
+          email: user.email,
+          role: "student",
+        };
+
+        axios
+          .post("http://localhost:5000/loggedInUsers", loggedInUsers)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
         Swal.fire({
           position: "top-end",
           icon: "success",

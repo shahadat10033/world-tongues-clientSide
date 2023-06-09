@@ -24,6 +24,7 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
     const { email, password } = data;
+
     loginUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -34,6 +35,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        reset();
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -42,6 +44,7 @@ const Login = () => {
           title: "Oops...",
           text: "login unsuccefull.try again!",
         });
+        reset();
       });
   };
   return (
