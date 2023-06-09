@@ -71,20 +71,20 @@ const MenuBar = () => {
             >
               Classes
             </NavLink>
-            {user && (
-              <NavLink
-                to="/dashboard"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? ""
-                    : isActive
-                    ? " text-decoration-none mt-3 text-primary ps-5"
-                    : "ps-5 text-decoration-none mt-3 text-dark"
-                }
-              >
-                Dashboard
-              </NavLink>
-            )}
+            (
+            <NavLink
+              to="/dashboard"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? ""
+                  : isActive
+                  ? " text-decoration-none mt-3 text-primary ps-5"
+                  : "ps-5 text-decoration-none mt-3 text-dark"
+              }
+            >
+              Dashboard
+            </NavLink>
+            )
             <span className="mt-2">
               {user ? (
                 <span className="ms-5">

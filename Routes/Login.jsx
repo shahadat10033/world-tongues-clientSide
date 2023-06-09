@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import loginAnimation from "../public/login.json";
@@ -14,6 +14,10 @@ const Login = () => {
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const { loginUser } = useContext(AuthContex);
 
   const {
@@ -35,6 +39,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate(from, { replace: true });
         reset();
       })
       .catch((error) => {
