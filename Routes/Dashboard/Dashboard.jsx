@@ -27,7 +27,7 @@ const Dashboard = () => {
   return (
     <div>
       {users[0]?.role == "admin" && (
-        <div className="d-flex" style={{ height: "100vh" }}>
+        <div className="d-flex" style={{ height: "95vh" }}>
           <div className="bg-danger-subtle" style={{ width: "20%" }}>
             <div className="d-flex flex-column h-100 justify-content-center">
               <Nav defaultActiveKey="/home" className="flex-column">

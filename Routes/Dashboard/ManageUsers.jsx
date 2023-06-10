@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "react-bootstrap";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
-  const [disable, setDisable] = useState(false);
   async function fetchData() {
     const response = await fetch("http://localhost:5000/loggedInUsers");
     const data = await response.json();
@@ -51,47 +50,54 @@ const ManageUsers = () => {
       });
   };
   return (
-    <div className="m-5">
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>User Name</th>
-            <th>User Email</th>
-            <th>Role</th>
-            <th>Action</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        {data?.map((user, index) => (
-          <tbody className=" fs-5 fw-semibold" key={user._id}>
+    <div>
+      <p className="fw-bold fs-1 mt-3">All User</p>
+      <div
+        className="m-5 overflow-scroll"
+        style={{ height: "25rem", width: "100rem" }}
+      >
+        <Table striped bordered hover>
+          <thead>
             <tr>
-              <td>{index + 1}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <button
-                  disabled={user.role == "admin" ? true : false}
-                  className="btn btn-success rounded-4"
-                  onClick={() => handleAdmin(user._id, user)}
-                >
-                  make admin
-                </button>
-              </td>
-              <td>
-                <button
-                  disabled={user.role == "instructor" ? true : false}
-                  className="btn btn-info rounded-4"
-                  onClick={() => handleInstructor(user._id, user)}
-                >
-                  make instructor
-                </button>
-              </td>
+              <th>#</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>Role</th>
+              <th>Action</th>
+              <th>Action</th>
             </tr>
-          </tbody>
-        ))}
-      </Table>
+          </thead>
+          {data &&
+            data.map((user, index) => (
+              <tbody className=" fs-5 fw-semibold" key={user._id}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <button
+                      disabled={user.role == "admin" ? true : false}
+                      className="btn btn-success rounded-4"
+                      onClick={() => handleAdmin(user._id, user)}
+                    >
+                      make admin
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      disabled={user.role == "instructor" ? true : false}
+                      className="btn btn-info rounded-4"
+                      onClick={() => handleInstructor(user._id, user)}
+                    >
+                      make instructor
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
+        </Table>
+      </div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ import ManageUsers from "../Routes/Dashboard/ManageUsers";
 import ManageClasses from "../Routes/Dashboard/ManageClasses";
 import AddClass from "../Routes/Dashboard/AddClass";
 import MyCLasses from "../Routes/Dashboard/MyCLasses";
+import UpdateFeedback from "../Routes/Dashboard/UpdateFeedback";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
             <Dashboard></Dashboard>
           </ProtectedRoute>
         ),
-        errorElement: <ErrPage></ErrPage>,
+
         children: [
           {
             path: "/dashboard/selectedClasses",
@@ -75,6 +76,13 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/manageClasses",
             element: <ManageClasses></ManageClasses>,
+          },
+          {
+            path: "/dashboard/manageClasses/feedback/:id",
+            element: <UpdateFeedback></UpdateFeedback>,
+            loader: ({ params }) => {
+              return fetch(`http://localhost:5000/singleClass/${params.id}`);
+            },
           },
           {
             path: "/dashboard/manageUsers",
