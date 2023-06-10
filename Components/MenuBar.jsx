@@ -71,7 +71,7 @@ const MenuBar = () => {
             >
               Classes
             </NavLink>
-            (
+
             <NavLink
               to="/dashboard"
               className={({ isActive, isPending }) =>
@@ -84,7 +84,7 @@ const MenuBar = () => {
             >
               Dashboard
             </NavLink>
-            )
+
             <span className="mt-2">
               {user ? (
                 <span className="ms-5">

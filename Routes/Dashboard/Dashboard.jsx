@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import axios from "axios";
 import { useEffect } from "react";
 import { AuthContex } from "../../Provider/AuthProvider";
+// TODO Icon letter
+// import {
+//   FaLayerGroupe,
+//   FaBookBookmark,
+//   FaMoneyBill1Wave,
+// } from "react-icons/fa6";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -27,52 +33,40 @@ const Dashboard = () => {
               <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/home"
+                    to="/dashboard/manageUsers"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-3 text-primary  "
+                        : "  text-decoration-none mt-3 text-dark"
                     }
                   >
-                    Home
+                    Manage Users
                   </NavLink>
                 </Nav.Item>
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/about"
+                    to="/dashboard/manageClasses"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-5 text-primary  "
+                        : "  text-decoration-none mt-5  text-dark"
                     }
                   >
-                    About
-                  </NavLink>
-                </Nav.Item>
-                <Nav.Item className="my-2">
-                  <NavLink
-                    to="/services"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? ""
-                        : isActive
-                        ? " text-decoration-none mt-5 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-5  text-dark"
-                    }
-                  >
-                    Services
+                    Manage Classes
                   </NavLink>
                 </Nav.Item>
               </Nav>
             </div>
           </div>
-          <div className="flex-grow-1 mt-5 pt-5 text-center fw-bold fs-1">
+
+          <div className="flex-grow-1 mt-5 pt-5  text-center fw-bold fs-1">
             welcome to <span className="text-danger">{users[0]?.role} </span>{" "}
             Dashboard
+            <Outlet></Outlet>
           </div>
         </div>
       )}
@@ -83,52 +77,40 @@ const Dashboard = () => {
               <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/home"
+                    to="/dashboard/addAClass"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-3 text-primary  "
+                        : "  text-decoration-none mt-3 text-dark"
                     }
                   >
-                    Home
+                    Add A Class
                   </NavLink>
                 </Nav.Item>
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/about"
+                    to="/dashboard/myClasses"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-5 text-primary  "
+                        : "  text-decoration-none mt-5  text-dark"
                     }
                   >
-                    About
-                  </NavLink>
-                </Nav.Item>
-                <Nav.Item className="my-2">
-                  <NavLink
-                    to="/services"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? ""
-                        : isActive
-                        ? " text-decoration-none mt-5 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-5  text-dark"
-                    }
-                  >
-                    Services
+                    My Classes
                   </NavLink>
                 </Nav.Item>
               </Nav>
             </div>
           </div>
-          <div className="flex-grow-1 mt-5 pt-5 text-center fw-bold fs-1">
+
+          <div className="flex-grow-1 mt-5 pt-5  text-center fw-bold fs-1">
             welcome to <span className="text-danger">{users[0]?.role} </span>{" "}
             Dashboard
+            <Outlet></Outlet>
           </div>
         </div>
       )}
@@ -139,52 +121,54 @@ const Dashboard = () => {
               <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/home"
+                    to="/dashboard/selectedClasses"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-3 text-primary  "
+                        : "  text-decoration-none mt-3 text-dark"
                     }
                   >
-                    Home
+                    Selected Classes
                   </NavLink>
                 </Nav.Item>
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/about"
+                    to="/dashboard/enrolledClasses"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-3 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-3 text-dark"
+                        ? " text-decoration-none mt-3 text-primary  "
+                        : "  text-decoration-none mt-3 text-dark"
                     }
                   >
-                    About
+                    Enrolled Classes
                   </NavLink>
                 </Nav.Item>
                 <Nav.Item className="my-2">
                   <NavLink
-                    to="/services"
+                    to="/dashboard/paymentHistory"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? ""
                         : isActive
-                        ? " text-decoration-none mt-5 text-primary ps-5"
-                        : "ps-5 text-decoration-none mt-5  text-dark"
+                        ? " text-decoration-none mt-5 text-primary  "
+                        : "  text-decoration-none mt-5  text-dark"
                     }
                   >
-                    Services
+                    Payment History
                   </NavLink>
                 </Nav.Item>
               </Nav>
             </div>
           </div>
-          <div className="flex-grow-1 mt-5 pt-5 text-center fw-bold fs-1">
+
+          <div className="flex-grow-1 mt-5 pt-5  text-center fw-bold fs-1">
             welcome to <span className="text-danger">{users[0]?.role} </span>{" "}
             Dashboard
+            <Outlet></Outlet>
           </div>
         </div>
       )}

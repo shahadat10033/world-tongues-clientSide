@@ -15,6 +15,13 @@ import Classes from "../Routes/Classes";
 import Instructors from "../Routes/Instructors";
 import Dashboard from "../Routes/Dashboard/Dashboard";
 import ProtectedRoute from "../Routes/ProtectedRoute";
+import SelectedClasses from "../Routes/Dashboard/SelectedClasses";
+import EnrolledClasses from "../Routes/Dashboard/EnrolledClasses";
+import PaymentHistory from "../Routes/Dashboard/PaymentHistory";
+import ManageUsers from "../Routes/Dashboard/ManageUsers";
+import ManageClasses from "../Routes/Dashboard/ManageClasses";
+import AddClass from "../Routes/Dashboard/AddClass";
+import MyCLasses from "../Routes/Dashboard/MyCLasses";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -51,12 +58,37 @@ const router = createBrowserRouter([
             <Dashboard></Dashboard>
           </ProtectedRoute>
         ),
-        // children: [
-        //   {
-        //     path: "/dashboard",
-        //     element: <Instructors></Instructors>,
-        //   },
-        // ],
+        errorElement: <ErrPage></ErrPage>,
+        children: [
+          {
+            path: "/dashboard/selectedClasses",
+            element: <SelectedClasses></SelectedClasses>,
+          },
+          {
+            path: "/dashboard/enrolledClasses",
+            element: <EnrolledClasses></EnrolledClasses>,
+          },
+          {
+            path: "/dashboard/paymentHistory",
+            element: <PaymentHistory></PaymentHistory>,
+          },
+          {
+            path: "/dashboard/manageClasses",
+            element: <ManageClasses></ManageClasses>,
+          },
+          {
+            path: "/dashboard/manageUsers",
+            element: <ManageUsers></ManageUsers>,
+          },
+          {
+            path: "/dashboard/addAClass",
+            element: <AddClass></AddClass>,
+          },
+          {
+            path: "/dashboard/myClasses",
+            element: <MyCLasses></MyCLasses>,
+          },
+        ],
       },
     ],
   },
