@@ -23,6 +23,8 @@ import ManageClasses from "../Routes/Dashboard/ManageClasses";
 import AddClass from "../Routes/Dashboard/AddClass";
 import MyCLasses from "../Routes/Dashboard/MyCLasses";
 import UpdateFeedback from "../Routes/Dashboard/UpdateFeedback";
+import UpdateClass from "../Routes/Dashboard/UpdateClass";
+import PaymentPage from "../Routes/Dashboard/PaymentPage";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -95,6 +97,20 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/myClasses",
             element: <MyCLasses></MyCLasses>,
+          },
+          {
+            path: "/dashboard/myClasses/update/:id",
+            element: <UpdateClass></UpdateClass>,
+            loader: ({ params }) => {
+              return fetch(`http://localhost:5000/myClasses/${params.id}`);
+            },
+          },
+          {
+            path: "/dashboard/payment/:id",
+            element: <PaymentPage></PaymentPage>,
+            loader: ({ params }) => {
+              return fetch(`http://localhost:5000/singleClass/${params.id}`);
+            },
           },
         ],
       },

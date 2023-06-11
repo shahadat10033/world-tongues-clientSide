@@ -4,12 +4,13 @@ import { useQuery } from "react-query";
 import { AuthContex } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { useEffect } from "react";
 
 const Classes = () => {
+  const [selectedClass, setSelectedClass] = useState({});
   //   ToDo:button have to disable if user role are admin or instructor
   const { user } = useContext(AuthContex);
-  const handleSelect = () => {
+  const handleSelect = (id) => {
+    console.log(id);
     if (!user) {
       return Swal.fire({
         icon: "error",
@@ -17,6 +18,34 @@ const Classes = () => {
         text: "You have to log in first!",
       });
     }
+
+    fetch(`http://localhost:5000/singleClass/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setSelectedClass(data && data);
+        sendSelectedClass(data);
+      });
+    const sendSelectedClass = (selectedClass) => {
+      fetch("http://localhost:5000/selectedClass", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(selectedClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data?.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `class selected successfully `,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+    };
   };
   async function fetchData() {
     const response = await fetch("http://localhost:5000/approvedClasses");
@@ -25,8 +54,6 @@ const Classes = () => {
   }
   const { data } = useQuery("approvedClasses", fetchData);
   console.log(data);
-
-  useEffect(() => {}, []);
 
   return (
     <div>
@@ -65,7 +92,7 @@ const Classes = () => {
                     <button
                       className="btn btn-success"
                       disabled={aClass.availableSeats == 0 ? true : false}
-                      onClick={handleSelect}
+                      onClick={() => handleSelect(aClass._id)}
                     >
                       Select
                     </button>

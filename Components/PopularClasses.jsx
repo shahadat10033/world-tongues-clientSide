@@ -26,7 +26,7 @@ const PopularClasses = () => {
                     style={{ height: "15rem" }}
                   />
                   <p className=" fw-bold fs-5">
-                    Total Students: {pClass.students}
+                    Enroll Students: {pClass.students}
                   </p>
                 </div>
               </div>

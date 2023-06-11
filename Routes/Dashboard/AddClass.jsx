@@ -57,12 +57,12 @@ const AddClass = () => {
     <div>
       {" "}
       <h2 className="text-center fw-bold fs-1">Add A Class</h2>
-      <div className="m-auto mt-5 w-75 bg-black ">
+      <div className="m-auto mt-3 w-75 bg-black ">
         <form onSubmit={handleSubmit} className="row  ">
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5  "
+              className="form-control mt-4  "
               placeholder="Class name"
               name="className"
               required
@@ -71,7 +71,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5"
+              className="form-control mt-4"
               placeholder="Class Image"
               name="classImage"
               required
@@ -80,7 +80,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5  "
+              className="form-control mt-4 "
               placeholder="Instructor Name"
               name="instructorName"
               defaultValue={user?.displayName}
@@ -91,7 +91,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5"
+              className="form-control mt-4"
               placeholder="Instructor Email"
               name="instructorEmail"
               defaultValue={user?.email}
@@ -102,7 +102,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5  "
+              className="form-control mt-4  "
               placeholder="Instructor Photo"
               name="instructorPhoto"
               defaultValue={user?.photoURL}
@@ -113,7 +113,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="number"
-              className="form-control mt-5"
+              className="form-control mt-4"
               placeholder="Available Seats"
               name="availableSeats"
               required
@@ -122,7 +122,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="number"
-              className="form-control mt-5  "
+              className="form-control mt-4  "
               placeholder="Price"
               name="price"
               required
@@ -131,7 +131,7 @@ const AddClass = () => {
           <div className="form-group   col-md-6">
             <input
               type="text"
-              className="form-control mt-5 "
+              className="form-control mt-4"
               placeholder="Status:pending"
               name="status"
               defaultValue="pending"
@@ -140,8 +140,8 @@ const AddClass = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary my-5 w-50 mx-auto">
-            Submit
+          <button type="submit" className="btn btn-primary my-3 w-50 mx-auto">
+            Add class
           </button>
         </form>
       </div>
