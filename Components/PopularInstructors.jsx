@@ -4,7 +4,9 @@ import { Fade } from "react-awesome-reveal";
 
 const PopularInstructors = () => {
   async function fetchData() {
-    const response = await fetch("http://localhost:5000/popularClasses");
+    const response = await fetch(
+      "https://world-tongues-serverside.vercel.app/popularClasses"
+    );
     const data = await response.json();
     return data;
   }

@@ -9,7 +9,9 @@ const MyCLasses = () => {
   const [myclasses, setMyClasses] = useState([]);
   const { user } = useContext(AuthContex);
   useEffect(() => {
-    fetch(`http://localhost:5000/myClasses?instructorEmail=${user.email}`)
+    fetch(
+      `https://world-tongues-serverside.vercel.app/myClasses?instructorEmail=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

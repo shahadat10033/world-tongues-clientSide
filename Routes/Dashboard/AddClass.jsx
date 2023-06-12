@@ -32,7 +32,7 @@ const AddClass = () => {
     };
     console.log(instructorInfo);
 
-    fetch("http://localhost:5000/addClass", {
+    fetch("https://world-tongues-serverside.vercel.app/addClass", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(instructorInfo),

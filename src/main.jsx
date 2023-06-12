@@ -83,7 +83,9 @@ const router = createBrowserRouter([
             path: "/dashboard/manageClasses/feedback/:id",
             element: <UpdateFeedback></UpdateFeedback>,
             loader: ({ params }) => {
-              return fetch(`http://localhost:5000/singleClass/${params.id}`);
+              return fetch(
+                `https://world-tongues-serverside.vercel.app/singleClass/${params.id}`
+              );
             },
           },
           {
@@ -102,14 +104,18 @@ const router = createBrowserRouter([
             path: "/dashboard/myClasses/update/:id",
             element: <UpdateClass></UpdateClass>,
             loader: ({ params }) => {
-              return fetch(`http://localhost:5000/myClasses/${params.id}`);
+              return fetch(
+                `https://world-tongues-serverside.vercel.app/myClasses/${params.id}`
+              );
             },
           },
           {
             path: "/dashboard/payment/:id",
             element: <PaymentPage></PaymentPage>,
             loader: ({ params }) => {
-              return fetch(`http://localhost:5000/singleClass/${params.id}`);
+              return fetch(
+                `https://world-tongues-serverside.vercel.app/singleClass/${params.id}`
+              );
             },
           },
         ],

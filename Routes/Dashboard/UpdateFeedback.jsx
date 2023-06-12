@@ -12,11 +12,14 @@ const UpdateFeedback = () => {
 
     const updateInfo = { feedback };
     console.log(updateInfo);
-    fetch(`http://localhost:5000/allClasses/feedback/${_id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updateInfo),
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/allClasses/feedback/${_id}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(updateInfo),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

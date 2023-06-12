@@ -1,14 +1,18 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { AuthContex } from "../../Provider/AuthProvider";
 
 const PaymentHistory = () => {
+  const { user } = useContext(AuthContex);
   const [data, setdata] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:5000/payments")
+    fetch(`https://world-tongues-serverside.vercel.app/payments/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
+        setdata(data);
         console.log(data);
       });
   }, []);
@@ -25,19 +29,25 @@ const PaymentHistory = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>User Name</th>
-              <th>User Email</th>
-              <th>Role</th>
+              <th>date</th>
+              <th>Student Name</th>
+              <th>Student Email</th>
+              <th>Class Name</th>
+              <th>Price</th>
+              <th>Transaction Id</th>
             </tr>
           </thead>
           {data &&
-            data.map((user, index) => (
-              <tbody className=" fs-5 fw-semibold" key={user._id}>
+            data.map((sData, index) => (
+              <tbody className=" fs-5 fw-semibold" key={sData._id}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role}</td>
+                  <td>{sData.date}</td>
+                  <td>{sData.name}</td>
+                  <td>{sData.userEmail}</td>
+                  <td>{sData.className}</td>
+                  <td>{sData.price} $</td>
+                  <td>{sData.transactionId}</td>
                 </tr>
               </tbody>
             ))}

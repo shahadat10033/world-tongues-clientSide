@@ -5,7 +5,9 @@ import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   async function fetchData() {
-    const response = await fetch("http://localhost:5000/loggedInUsers");
+    const response = await fetch(
+      `https://world-tongues-serverside.vercel.app/loggedInUsers`
+    );
     const data = await response.json();
     return data;
   }
@@ -13,9 +15,12 @@ const ManageUsers = () => {
   console.log(data);
 
   const handleAdmin = (id, user) => {
-    fetch(`http://localhost:5000/loggedInUsers/admin/${id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/loggedInUsers/admin/${id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -32,9 +37,12 @@ const ManageUsers = () => {
   };
 
   const handleInstructor = (id, user) => {
-    fetch(`http://localhost:5000/loggedInUsers/instructor/${id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/loggedInUsers/instructor/${id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

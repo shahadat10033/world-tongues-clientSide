@@ -35,9 +35,12 @@ const UpdateClass = () => {
     };
     console.log(instructorInfo);
 
-    fetch(`http://localhost:5000/myClasses/update/${_id}`, {
-      method: "PUT",
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/myClasses/update/${_id}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

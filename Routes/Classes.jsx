@@ -4,11 +4,31 @@ import { useQuery } from "react-query";
 import { AuthContex } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Classes = () => {
   const [selectedClass, setSelectedClass] = useState({});
+
+  const [userEmail, setUserEmail] = useState(null);
+  const [users, setUsers] = useState([]);
+
   //   ToDo:button have to disable if user role are admin or instructor
   const { user } = useContext(AuthContex);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://world-tongues-serverside.vercel.app/loggedInUsers?email=${user?.email}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        const loggedUser = response.data;
+        setUsers(loggedUser);
+        setUserEmail(users && users[0]?.email);
+      });
+  }, []);
+
   const handleSelect = (id) => {
     console.log(id);
     if (!user) {
@@ -19,15 +39,16 @@ const Classes = () => {
       });
     }
 
-    fetch(`http://localhost:5000/singleClass/${id}`)
+    fetch(`https://world-tongues-serverside.vercel.app/singleClass/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        data.userEmail = userEmail;
         console.log(data);
         setSelectedClass(data && data);
-        sendSelectedClass(data);
+        sendSelectedClass(data && data);
       });
-    const sendSelectedClass = (selectedClass) => {
-      fetch("http://localhost:5000/selectedClass", {
+    const sendSelectedClass = () => {
+      fetch("https://world-tongues-serverside.vercel.app/selectedClass", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(selectedClass),
@@ -48,7 +69,9 @@ const Classes = () => {
     };
   };
   async function fetchData() {
-    const response = await fetch("http://localhost:5000/approvedClasses");
+    const response = await fetch(
+      "https://world-tongues-serverside.vercel.app/approvedClasses"
+    );
     const data = await response.json();
     return data;
   }
@@ -87,11 +110,17 @@ const Classes = () => {
                   <p className="fs-5 fw-semibold">
                     Available seats: {aClass.availableSeats}
                   </p>
+                  <p className="fs-5 fw-semibold">
+                    Enroll Students : {aClass.students}
+                  </p>
                   <p className="fs-5 fw-semibold">Price: $ {aClass.price}</p>
                   <div>
                     <button
-                      className="btn btn-success"
-                      disabled={aClass.availableSeats == 0 ? true : false}
+                      className={
+                        aClass.availableSeats < 1
+                          ? " btn btn-success disabled "
+                          : "btn btn-success"
+                      }
                       onClick={() => handleSelect(aClass._id)}
                     >
                       Select

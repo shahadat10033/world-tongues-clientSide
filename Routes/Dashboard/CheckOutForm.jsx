@@ -7,7 +7,16 @@ import { useState } from "react";
 import { AuthContex } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
-const CheckOutForm = ({ price, className }) => {
+const CheckOutForm = ({
+  price,
+  classImage,
+  className,
+  _id,
+  availableSeats,
+  students,
+  instructorName,
+  instructorEmail,
+}) => {
   const { user } = useContext(AuthContex);
   const [cardErr, setCardErr] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -17,7 +26,7 @@ const CheckOutForm = ({ price, className }) => {
   const elements = useElements();
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://world-tongues-serverside.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price }),
@@ -68,17 +77,31 @@ const CheckOutForm = ({ price, className }) => {
     console.log(paymentIntent);
     setProcessing(false);
     if (paymentIntent.status == "succeeded") {
+      fetch(
+        `https://world-tongues-serverside.vercel.app/selectedClasses/${_id}`,
+        {
+          method: "DELETE",
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data?.deletedCount > 0) {
+            console.log("deleted  successfully");
+          }
+        });
+
       setTransactionId(paymentIntent.id);
       const payment = {
         name: user?.displayName,
-        email: user?.email,
+        userEmail: user?.email,
         transactionId: paymentIntent.id,
         price,
         className,
         date: new Date(),
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://world-tongues-serverside.vercel.app/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payment),
@@ -87,6 +110,40 @@ const CheckOutForm = ({ price, className }) => {
         .then((data) => {
           console.log(data);
           if (data.insertedId) {
+            const enrollInfo = {
+              price,
+              classImage,
+              className,
+              _id,
+              students,
+              availableSeats,
+              instructorName,
+              instructorEmail,
+              userEmail: user.email,
+            };
+            fetch("https://world-tongues-serverside.vercel.app/enrollClass", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(enrollInfo),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
+
+            const updatedClass = { availableSeats, students };
+            fetch(
+              `https://world-tongues-serverside.vercel.app/singleClasses/${_id}`,
+              {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedClass),
+              }
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
             Swal.fire({
               position: "top-end",
               icon: "success",

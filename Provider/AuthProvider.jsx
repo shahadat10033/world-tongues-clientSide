@@ -47,7 +47,10 @@ const AuthProvider = ({ children }) => {
         };
 
         axios
-          .post("http://localhost:5000/loggedInUsers", loggedInUsers)
+          .post(
+            "https://world-tongues-serverside.vercel.app/loggedInUsers",
+            loggedInUsers
+          )
           .then((response) => {
             console.log(response.data);
           })
@@ -85,7 +88,7 @@ const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      setUser(currentUser && currentUser);
       setLoader(false);
       console.log(user);
     });

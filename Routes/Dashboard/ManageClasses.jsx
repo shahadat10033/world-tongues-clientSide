@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   async function fetchData() {
-    const response = await fetch("http://localhost:5000/allClasses");
+    const response = await fetch(
+      "https://world-tongues-serverside.vercel.app/allClasses"
+    );
     const data = await response.json();
     return data;
   }
@@ -14,9 +16,12 @@ const ManageClasses = () => {
   console.log(data);
 
   const handleApproved = (id, singleClass) => {
-    fetch(`http://localhost:5000/allClasses/approved/${id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/allClasses/approved/${id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -33,9 +38,12 @@ const ManageClasses = () => {
   };
 
   const handleDenied = (id, singleClass) => {
-    fetch(`http://localhost:5000/allClasses/denied/${id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://world-tongues-serverside.vercel.app/allClasses/denied/${id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

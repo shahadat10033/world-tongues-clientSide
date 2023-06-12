@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import registerAnimation from "../public/register.json";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,9 @@ import GoogleLogin from "../Shared/GoogleLogin";
 import axios from "axios";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const { registerEmail, userUpdate, logOut } = useContext(AuthContex);
   const {
     register,
@@ -36,7 +39,10 @@ const Register = () => {
       const loggedInUsers = { name, email, role: "student" };
 
       axios
-        .post("http://localhost:5000/loggedInUsers", loggedInUsers)
+        .post(
+          "https://world-tongues-serverside.vercel.app/loggedInUsers",
+          loggedInUsers
+        )
         .then((response) => {
           console.log(response.data);
         })
@@ -154,6 +160,7 @@ const Register = () => {
           <hr />
           <div className="text-center">
             <GoogleLogin></GoogleLogin>
+            {navigate(from, { replace: true })}
           </div>
         </div>
       </div>

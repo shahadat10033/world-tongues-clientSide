@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import GoogleLogin from "../Shared/GoogleLogin";
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
+
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
@@ -110,6 +111,7 @@ const Login = () => {
           <hr />
           <div className="text-center">
             <GoogleLogin></GoogleLogin>
+            {navigate(from, { replace: true })}
           </div>
         </div>
       </div>

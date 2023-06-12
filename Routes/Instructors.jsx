@@ -3,7 +3,9 @@ import { useQuery } from "react-query";
 
 const Instructors = () => {
   async function fetchData() {
-    const response = await fetch("http://localhost:5000/instructors");
+    const response = await fetch(
+      "https://world-tongues-serverside.vercel.app/instructors"
+    );
     const data = await response.json();
     return data;
   }

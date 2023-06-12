@@ -5,16 +5,15 @@ import { Navigate, useLocation } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
   const { loader, user } = useContext(AuthContex);
-  // Todo
+
   if (loader) {
-    return (
-      <div
-        className="text-center fw-bold fs-1 my-5 pt-5"
-        style={{ minHeight: "80vh" }}
-      >
-        Loading...
-      </div>
-    );
+    <div
+      className="text-center fw-bold fs-1 my-5 pt-5"
+      style={{ minHeight: "80vh" }}
+    >
+      Loading... Loading... Loading... Loading... Loading... Loading...
+      Loading... Loading... Loading... Loading...
+    </div>;
   }
 
   if (user) {
