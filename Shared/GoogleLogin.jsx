@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const GoogleLogin = () => {
   const { googleSignUp } = useContext(AuthContex);
